@@ -1,7 +1,0 @@
-number,state,usedtoVR,Gau,Car1,Car2,Car3,Car4,Car5,Car6,Car7,Car8,Car9,Car10,Car11,Car12,Car13,Car14,Car15,Car16,Car17
-1,motion,yes,17,1,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,1
-2,motion,yes,27,1,1,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0
-3,motion,yes,20,1,0,1,0,0,1,1,0,1,1,1,0,0,0,0,0,1
-4,motion,yes,12,0,0,1,1,0,1,1,1,1,1,1,1,0,0,0,1,0
-5,motionless,yes,15,1,0,1,0,0,1,0,1,1,0,0,1,0,0,0,0,0
-6,motion,yes,15,0,1,0,1,0,0,0,1,0,0,1,0,1,1,1,1,1
