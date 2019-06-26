@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 from questions import q
-from interface import display
+from interface import MainView
 import csv
 
 
@@ -146,38 +146,25 @@ def to_percent(value, tick_number):
 
 
 def add_participant():
-    # 16,  1 3 7 8 12
-    """
-    type_sujet = input("Motion ? (y/n) \n")
-    if type_sujet == "y":
-        type_sujet = "motion"
-    else:
-        type_sujet = "motionless"
-    state_sujet = input("Used to VR ? (y/n) \n")
-    if state_sujet == "y":
-        state_sujet = "yes"
-    else:
-        state_sujet = "no"
-
-    gau_participant = int(input("Number of results at GAU \n"))
-    input_string = input("Enter correct answers separated by space \n")
-    answers_sujet = [int(x) for x in input_string.split(" ")]
-    """
-
-    r = display()
-    print(r)
-    if r[0] == 1:
-        state_sujet = "yes"
-    else:
-        state_sujet = "no"
-    if r[1] == 1:
-        type_sujet = "motion"
-    else:
-        type_sujet = "motionless"
-
+    w = MainView()
+    w.run()
+    r = w.results_participant
+    # print(r)
+    # state_sujet = r[0]
+    # type_sujet = r[1]
+    #
+    # if r[0] == 1:
+    #     state_sujet = "yes"
+    # else:
+    #     state_sujet = "no"
+    # if r[1] == 1:
+    #     type_sujet = "motion"
+    # else:
+    #     type_sujet = "motionless"
+    #
     answers_sujet = r[3]
 
-    results.append([len(results) + 1, type_sujet, state_sujet, int(r[2]), answers_sujet])
+    results.append([len(results) + 1, r[0], r[1], r[2], r[3]])
     write_csv("data.csv", results)
 
     color = ["black"] * 17
@@ -205,7 +192,6 @@ if __name__ == "__main__":
 
     answers = []
 
-    # numéro, 'type', GAU, CRA[]
     results = read_csv("data.csv")
     for r in results:
         if r[1] == 'motion':
