@@ -78,10 +78,10 @@ class MainView:
             used_to_vr = "no"
         if gau == "":
             gau = -1
-        self.results_participant = [state,used_to_vr,  int(gau), car]
+        self.results_participant = [state, used_to_vr, int(gau), car]
+        self.window.destroy()
 
 
 if __name__ == '__main__':
     w = MainView()
     w.run()
-    print(w.results_participant)

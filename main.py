@@ -1,7 +1,8 @@
 import matplotlib.pyplot as plt
+import csv
 from questions import q
 from interface import MainView
-import csv
+from tkinter import *
 
 
 def results_to_csv(data):
@@ -149,19 +150,7 @@ def add_participant():
     w = MainView()
     w.run()
     r = w.results_participant
-    # print(r)
-    # state_sujet = r[0]
-    # type_sujet = r[1]
-    #
-    # if r[0] == 1:
-    #     state_sujet = "yes"
-    # else:
-    #     state_sujet = "no"
-    # if r[1] == 1:
-    #     type_sujet = "motion"
-    # else:
-    #     type_sujet = "motionless"
-    #
+
     answers_sujet = r[3]
 
     results.append([len(results) + 1, r[0], r[1], r[2], r[3]])
@@ -183,6 +172,34 @@ def show_results(color=None):
     plt.show()
 
 
+class Acceuil:
+    def __init__(self):
+        self.window = Tk()
+
+        button_add = Button(self.window, text="Add",
+                            command=lambda: self.action_add())
+        button_show = Button(self.window, text="Show",
+                             command=lambda: self.action_show())
+        button_quit = Button(self.window, text="Quit",
+                             command=self.window.quit)
+
+        button_add.pack()
+        button_show.pack()
+        button_quit.pack()
+
+    def run(self):
+        self.window.title("Time to Explain")
+        self.window.mainloop()
+
+    def action_add(self):
+        # self.window.destroy()
+        add_participant()
+
+    def action_show(self):
+        #self.window.destroy()
+        show_results()
+
+
 if __name__ == "__main__":
     GAU_motion = []
     CRA_motion = []
@@ -202,11 +219,14 @@ if __name__ == "__main__":
             CRA_motionless.append(len(r[4]))
         answers += r[4]
 
-    while True:
-        x = input("Commande (add/show/exit)\n")
-        if x == "add":
-            add_participant()
-        elif x == "show":
-            show_results()
-        elif x == "exit":
-            exit()
+    # while True:
+    #     x = input("Commande (add/show/exit)\n")
+    #     if x == "add":
+    #         add_participant()
+    #     elif x == "show":
+    #         show_results()
+    #     elif x == "exit":
+    #         exit()
+
+    acceuil = Acceuil()
+    acceuil.run()
