@@ -41,7 +41,7 @@ def csv_to_results(data):
 def create_boxplot():
     fig1 = plt.figure()
     fig1.suptitle('Motion VS Motionless')
-    fig1.canvas.set_window_title('LAMPA Experiment')
+    fig1.canvas.set_window_title('Time 2 Explain')
 
     ax1 = fig1.add_subplot(221)
     ax1.set_title('CRA_motion')
@@ -79,7 +79,7 @@ def create_boxplot():
 
 def create_histogram(color):
     fig2 = plt.figure()
-    fig2.canvas.set_window_title('LAMPA Experiment')
+    fig2.canvas.set_window_title('Time 2 Experiment')
 
     ax1 = fig2.add_subplot(121)
     ax1.set_title('Motion')
@@ -162,17 +162,26 @@ def add_participant():
 
     show_results(color)
 
-    return color
-
 
 def show_results(color=None):
     if color is not None:
         create_histogram(color)
     create_boxplot()
     plt.show()
+    ac = Singleton()
+    ac.run()
 
 
-class Acceuil:
+class Singleton(object):
+    instance = None  # Attribut statique de classe
+
+    def __new__(cls):
+        """méthode de construction standard en Python"""
+        if cls.instance is None:
+            cls.instance = object.__new__(cls)
+
+        return cls.instance
+
     def __init__(self):
         self.window = Tk()
 
@@ -181,7 +190,7 @@ class Acceuil:
         button_show = Button(self.window, text="Show",
                              command=lambda: self.action_show())
         button_quit = Button(self.window, text="Quit",
-                             command=self.window.quit)
+                             command=self.window.destroy)
 
         button_add.pack()
         button_show.pack()
@@ -192,11 +201,11 @@ class Acceuil:
         self.window.mainloop()
 
     def action_add(self):
-        # self.window.destroy()
+        acceuil.window.destroy()
         add_participant()
 
     def action_show(self):
-        #self.window.destroy()
+        acceuil.window.destroy()
         show_results()
 
 
@@ -219,14 +228,5 @@ if __name__ == "__main__":
             CRA_motionless.append(len(r[4]))
         answers += r[4]
 
-    # while True:
-    #     x = input("Commande (add/show/exit)\n")
-    #     if x == "add":
-    #         add_participant()
-    #     elif x == "show":
-    #         show_results()
-    #     elif x == "exit":
-    #         exit()
-
-    acceuil = Acceuil()
+    acceuil = Singleton()
     acceuil.run()
