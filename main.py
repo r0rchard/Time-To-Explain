@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
+from tkinter import *
 import csv
 from questions import q
 from interface import MainView
-from tkinter import *
 
 
 def results_to_csv(data):
@@ -114,12 +114,6 @@ def create_histogram(color):
                                      edgecolor='black', weights=weights_answers_inverse,
                                      orientation='horizontal')
     front_hist(17, hist_true, hist_false, color)  # if answer is right show the true_hist, else show false_hist
-
-    # Set the formatter to show %
-    # formatter = FuncFormatter(to_percent)
-    # plt.gca().xaxis.set_major_formatter(formatter)
-    # plt.gca().xaxis.set_major_formatter(PercentFormatter(5))
-
     plt.tight_layout()
 
 
@@ -139,28 +133,24 @@ def front_hist(nbr, hist1, hist2, color):
             hist2[k].set_zorder(0)
 
 
-def to_percent(value, tick_number):
-    # Ignore the passed in position. This has the effect of scaling the default
-    # tick locations.
-    e, d = str(value * 100 / len(results)).split(".")
-    return e
-
-
 def add_participant():
     w = MainView()
     w.run()
     r = w.results_participant
+    if not r :
+        ac = Singleton()
+        ac.run()
+    else:
+        answers_sujet = r[3]
 
-    answers_sujet = r[3]
+        results.append([len(results) + 1, r[0], r[1], r[2], r[3]])
+        write_csv("data.csv", results)
 
-    results.append([len(results) + 1, r[0], r[1], r[2], r[3]])
-    write_csv("data.csv", results)
+        color = ["black"] * 17
+        for value in answers_sujet:
+            color[value - 1] = "green"
 
-    color = ["black"] * 17
-    for value in answers_sujet:
-        color[value - 1] = "green"
-
-    show_results(color)
+        show_results(color)
 
 
 def show_results(color=None):

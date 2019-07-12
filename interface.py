@@ -37,8 +37,8 @@ class MainView:
                              command=lambda: self.save_data(value_state.get(), value_vr.get(),
                                                             value_gau.get(),
                                                             self.answers_car))
-        button_quit = Button(self.window, text="Quitter",
-                             command=self.window.quit)
+        button_quit = Button(self.window, text="Annuler",
+                             command=self.window.destroy)
 
         label_vr.grid(row=1, column=0, sticky=E)
         button_vr_oui.grid(row=1, column=1)
